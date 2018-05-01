@@ -1,4 +1,5 @@
 .idea
 db.sqlite3
 trail_django/__pycache__
+pollApp/__pycache__
 
