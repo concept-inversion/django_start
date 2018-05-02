@@ -2,4 +2,5 @@
 db.sqlite3
 trail_django/__pycache__
 pollApp/__pycache__
-
+.vscode
+pollApp/migrations/__pycache__
