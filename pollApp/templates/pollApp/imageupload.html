@@ -1,0 +1,6 @@
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Image upload.</p>
+    <input type="file" name="image" />
+    <input type="submit" value="Submit" />
+</form>

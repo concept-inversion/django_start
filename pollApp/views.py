@@ -6,6 +6,8 @@ from .models import Question,Choice
 from django.views import generic
 from django.utils import timezone
 from django.core.mail import send_mail
+from .forms import UploadForm
+from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
 class IndexView(generic.ListView):
@@ -60,3 +62,39 @@ class DetailView(generic.DetailView):
 class ResultsView(generic.DetailView):
     model = Question
     template_name = 'pollApp/results.html'
+
+
+def formupload(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = UploadForm(request.POST)
+        # check whether it's valid:
+        #if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+        return HttpResponseRedirect('/thanks/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = UploadForm()
+    return render(request, 'pollApp/name.html', {'form': form})
+
+
+def imageupload(request):
+    if request.method == 'POST':
+        
+        #form = (request.POST,request.FILES)
+        if request.FILES['image']:
+            image = request.FILES['image']
+            fs = FileSystemStorage()
+            imagefile=fs.save(image.name,image)
+            file_url = fs.url(imagefile)
+            return render(request, 'pollApp/imageupload.html', {
+            'uploaded_file_url': file_url})
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = UploadForm()
+    return render(request, 'pollApp/imageupload.html')
