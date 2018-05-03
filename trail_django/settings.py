@@ -114,6 +114,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '29608476cae5ef'
+EMAIL_HOST_PASSWORD = '273f8cb4d66bb0'
+EMAIL_PORT = '2525'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/

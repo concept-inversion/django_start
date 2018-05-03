@@ -5,6 +5,7 @@ from django.template import loader
 from .models import Question,Choice
 from django.views import generic
 from django.utils import timezone
+from django.core.mail import send_mail
 
 # Create your views here.
 class IndexView(generic.ListView):
@@ -32,7 +33,15 @@ def vote(request, question_id):
         })
     else:
         selected_choice.votes += 1
+        
         selected_choice.save()
+        send_mail(
+        'About Voting',
+        'Voted.',
+        'from@santo.com',
+        ['to@users.com'],
+        fail_silently=False,
+        )
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
