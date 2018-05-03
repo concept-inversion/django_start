@@ -23,5 +23,5 @@ class Choice(models.Model):
     def __str__(self):
         return self.choice_text
     
-class imageupload(models.Model):
-    image = models.ImageField(upload_to='images/%Y/%m/')
+class Imageupload(models.Model):
+    image = models.ImageField()

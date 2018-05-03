@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.urls import reverse
 from django.template import loader
-from .models import Question,Choice
+from .models import Question,Choice,Imageupload
 from django.views import generic
 from django.utils import timezone
 from django.core.mail import send_mail
@@ -91,9 +91,10 @@ def imageupload(request):
             fs = FileSystemStorage()
             imagefile=fs.save(image.name,image)
             file_url = fs.url(imagefile)
+            image = Imageupload( image = file_url)
+            image.save()
             return render(request, 'pollApp/imageupload.html', {
             'uploaded_file_url': file_url})
-
     # if a GET (or any other method) we'll create a blank form
     else:
         form = UploadForm()
